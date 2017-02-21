@@ -18,6 +18,30 @@ class Metodoseu
 	@ReparticionMR
 	@SectorMR
 
+	@SolapaSeleccionada
+	@SubSolapaSeleccionada
+
+	#Componentes Alta Repartición
+	#Clase z-textbox
+	@compAltaCod
+	@compAltaNom
+	@compAltaTel
+	@compAltaFax
+	@compAltaOfi
+	@compAltaMail
+	@compAltaCalle
+	@compAltaAltura
+	@compAltaPiso
+	@compAltaDpto
+	@compAltaCp
+
+	@compAltaEst
+	@compAltaRepPa
+	@compAltaJu
+	@compAltaAdmin 
+
+	@compAltaBusq
+	#***************************
 	@respuesta
 
 	#Inicialización obj browser que abre el navegador
@@ -32,8 +56,8 @@ class Metodoseu
 
 	#Ingreso a la página deseada
 	def AbrirPag(url)
-		SetNavegador(url)
 		AbrirNav()
+		SetNavegador(url)
 		@browser.get @Pag.to_s
 	end
 
@@ -91,5 +115,91 @@ class Metodoseu
 	def SeleccionMR
 		ComponenteIngMultiEU()
 		@ComponenteTablaMR.click
+		sleep(4)
+		@BotonOk = @browser.find_element(:xpath, "//div[contains(@class,'z-window-highlighted z-window-highlighted-shadow')]//td[contains(.,'') and contains(@class,'z-button-cm')]")
+		@BotonOk.click
 	end
+
+
+def SeleccionarSolapa(solapaa)
+		@SolapaSeleccionada = @browser.find_element(:xpath, "//li[contains(@class, 'z-tab') and contains(., '#{solapaa}')]")
+		@SolapaSeleccionada.click
+end		
+
+def SeleccionarSubSolapa(solapa)
+		@SubSolapaSeleccionada = @browser.find_element(:xpath, "//li[contains(@class, 'z-tab') and contains(., '#{solapa}')]")
+		@SubSolapaSeleccionada.click
+end
+
+def SeleccionarAlta(alta)
+	@ComponenteAlta = @browser.find_element(:xpath, "//div[contains(@class, 'z-toolbarbutton-cnt') and contains(., '#{alta}')]")
+	@ComponenteAlta.click
+end
+
+
+def ComponentesAltaRepa
+	elementosaltarepatext = @browser.find_elements(:xpath, "//div[contains(@class, 'z-grid')]//div[contains(@class,'z-row-cnt z-overflow-hidden')]//input[contains(@class, 'z-textbox')]")
+
+	@compAltaCod = elementosaltarepatext[0]
+	@compAltaNom = elementosaltarepatext[1]
+	@compAltaTel = elementosaltarepatext[2]
+	@compAltaFax = elementosaltarepatext[3]
+	@compAltaOfi = elementosaltarepatext[4]
+	@compAltaMail = elementosaltarepatext[5]
+	@compAltaCalle = elementosaltarepatext[7]
+	@compAltaAltura = elementosaltarepatext[8]
+	@compAltaPiso = elementosaltarepatext[9]
+	@compAltaDpto = elementosaltarepatext[10]
+	@compAltaCp = elementosaltarepatext[11]
+
+	elementosaltarepaband = @browser.find_elements(:xpath, "//div[contains(@class, 'z-grid')]//input[contains(@class, 'z-bandbox-inp z-bandbox-readonly')]")
+	@compAltaEst = elementosaltarepaband[0]
+	@compAltaRepPa = elementosaltarepaband[1]
+	@compAltaJu = elementosaltarepaband[3]
+	@compAltaAdmin = elementosaltarepaband[4]
+
+	
+end
+
+def DatosAltaRepa()
+	ComponentesAltaRepa()
+	
+	@compAltaCod.click
+	@compAltaCod.send_keys("asd")
+	@compAltaNom.click
+	@compAltaNom.send_keys("qwe")
+	@compAltaTel.click
+	@compAltaTel.send_keys("123")
+	@compAltaFax.click
+
+	@compAltaEst.click
+	sleep(4)
+	elementosaltabandbuscar = @browser.find_element(:xpath, "//div[contains(@class, 'z-bandbox-pp z-bandbox-shadow')]//div[contains(@class, 'z-groupbox-cnt')]//input[contains(@class, 'z-textbox')]")
+	@compAltaBusq = elementosaltabandbuscar
+	
+	@compAltaBusq.click
+	@compAltaBusq.send_keys("R01")
+
+
+	@compAltaFax.send_keys("123asd")
+	@compAltaOfi.click
+	@compAltaOfi.send_keys("23")
+	@compAltaMail.click
+	@compAltaMail.send_keys("wer@hotmail.com")
+	@compAltaCalle.click
+	@compAltaCalle.send_keys("asdasdasd")
+	@compAltaAltura.click
+	@compAltaAltura.send_keys("234")
+	@compAltaPiso.click
+	@compAltaPiso.send_keys("34")
+	@compAltaDpto.click
+	@compAltaDpto.send_keys("234324")
+	@compAltaCp.click
+	@compAltaCp.send_keys("asd")
+end
+
+def combobox
+
+end
+
 end

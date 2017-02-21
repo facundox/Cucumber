@@ -20,3 +20,18 @@ Entonces (/^debo ingresar a EU$/) do
 	@nav.SeleccionMR
 
 end
+
+
+Cuando (/^selecciono la solapa Administración$/) do
+	sleep(4)
+	@nav.SeleccionarSolapa("Administración")
+end
+
+Cuando (/^selecciono la subsolapa Sellos$/) do
+	sleep(5)
+	@nav.SeleccionarSubSolapa("Reparticiones")
+	sleep(3)
+	@nav.SeleccionarAlta("Alta Repartición")
+	sleep(3)
+	@nav.DatosAltaRepa
+end
